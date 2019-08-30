@@ -16,8 +16,8 @@
 		<li> <a href="formAluno.jsp">Cadastrar Aluno</a>
 	</ul>
 	<ul>
-		<li> <a href="sistema?logica=ListarCidades">Lista de Cidades</a>
-		<li> <a href="sistema?logica=ListarAlunos">Lista de Alunos</a>
+		<li> <a href="sistema?logica=ListarCidade">Lista de Cidades</a>
+		<li> <a href="sistema?logica=ListarAluno">Lista de Alunos</a>
 	</ul>
 </body>
 </html>

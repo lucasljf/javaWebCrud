@@ -17,7 +17,7 @@
 			<td>Estado</td>
 		</tr>
 		<%
- 			List<Cidade> cidades = (List<Cidade>) request.getAttribute("lista");
+			List<Cidade> cidades = (List<Cidade>) request.getAttribute("lista");
 			for (Cidade c : cidades) {
 				out.println("<tr>");
 				out.println("<td>" + c.getId() + "</td>");

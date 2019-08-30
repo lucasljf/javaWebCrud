@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h3>Cadastro de Aluno</h3>
-	<form action="cadastrarAluno">
+	<form action="sistema?logica=CadastrarAluno" method="post">
 		Nome: <br>
 		<input type="text" name="nome" > <br><br>
 		Idade: <br>

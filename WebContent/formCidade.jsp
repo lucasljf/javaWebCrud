@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h3>Cadastro de Cidade</h3>
-	<form action="cadastrarCidade">
+	<form action="sistema?logica=CadastrarCidade" method="post">
 		Nome: <br>
 		<input type="text" name="nome"> <br><br>
 		Estado: <br>
