@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.lucasfaria.javawebcrud.dao.AlunoDao;
 import br.com.lucasfaria.javawebcrud.model.Aluno;
 
-public class ListarAluno {
-	public void executa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class ListarAluno implements Logica {
+	
+	@Override
+	public String executa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Aluno> lista = new AlunoDao().listarTudo();
 
 		req.setAttribute("lista", lista);
-		RequestDispatcher rd = req.getRequestDispatcher("listaDeAlunos.jsp");
-		rd.forward(req, resp);
+
+		return "listaDeAlunos.jsp";
 	}
 }

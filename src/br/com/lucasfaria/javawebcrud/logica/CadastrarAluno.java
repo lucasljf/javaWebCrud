@@ -12,8 +12,10 @@ import br.com.lucasfaria.javawebcrud.dao.CidadeDao;
 import br.com.lucasfaria.javawebcrud.model.Aluno;
 import br.com.lucasfaria.javawebcrud.model.Cidade;
 
-public class CadastrarAluno {
-	public void executa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class CadastrarAluno implements Logica {
+	
+	@Override
+	public String executa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nome = req.getParameter("nome");
 		int idade = Integer.parseInt(req.getParameter("idade"));
 		int idCidade = Integer.parseInt(req.getParameter("idCidade"));
@@ -23,7 +25,6 @@ public class CadastrarAluno {
 		Aluno aluno = new Aluno(nome, idade, cidade);
 		new AlunoDao().inserir(aluno);
 
-		RequestDispatcher rd = req.getRequestDispatcher("sucessoAluno.jsp");
-		rd.forward(req, resp);
+		return "sucessoAluno.jsp";
 	}
 }

@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.lucasfaria.javawebcrud.dao.CidadeDao;
 import br.com.lucasfaria.javawebcrud.model.Cidade;
 
-public class CadastrarCidade {
+public class CadastrarCidade implements Logica {
 
-	public void executa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	public String executa(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nome = req.getParameter("nome");
 		String estado = req.getParameter("estado");
 
@@ -22,7 +23,6 @@ public class CadastrarCidade {
 
 		new CidadeDao().inserir(cidade);
 
-		RequestDispatcher rd = req.getRequestDispatcher("sucessoCidade.jsp");
-		rd.forward(req, resp);
+		return "sucessoCidade.jsp";
 	}
 }

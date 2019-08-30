@@ -8,31 +8,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.lucasfaria.javawebcrud.logica.CadastrarAluno;
-import br.com.lucasfaria.javawebcrud.logica.CadastrarCidade;
-import br.com.lucasfaria.javawebcrud.logica.ListarAluno;
-import br.com.lucasfaria.javawebcrud.logica.ListarCidade;
+import br.com.lucasfaria.javawebcrud.logica.Logica;
 
 @WebServlet("/sistema")
 public class ControllerServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String acao = req.getParameter("logica");
+		String parametro = req.getParameter("logica");
+		String nomeClasse = "br.com.lucasfaria.javawebcrud.logica." + parametro;
 
-		if (acao.equals("CadastrarCidade")) {
-			new CadastrarCidade().executa(req, resp);
+		try {
+			Class<?> classe = Class.forName(nomeClasse);
+//			Logica logica = (Logica) classe.newInstance();
+			Logica logica = (Logica) classe.getDeclaredConstructor().newInstance();
+			
+//			Após a execução da lógica, recebe um string
+			String pagina = logica.executa(req, resp);
+			
+//			Faz o direcionamento (forward) para a página JSP
+			req.getRequestDispatcher(pagina).forward(req, resp);
 
-		} else if (acao.equals("ListarCidade")) {
-			new ListarCidade().executa(req, resp);
-		}
-
-		else if (acao.equals("CadastrarAluno")) {
-			new CadastrarAluno().executa(req, resp);
-		}
-
-		else if (acao.equals("ListarAluno")) {
-			new ListarAluno().executa(req, resp);
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 	}
 }
