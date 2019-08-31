@@ -16,6 +16,7 @@
 			<th>Nome</th>
 			<th>Idade</th>
 			<th>Cidade</th>
+			<th>Excluir</th>
 		</tr>
 		<%
 			List<Aluno> alunos = (List<Aluno>) request.getAttribute("lista");
@@ -27,6 +28,7 @@
 			<td><%=a.getNome()%></td>
 			<td><%=a.getIdade()%></td>
 			<td><%=a.getCidade().getNome() + " - " + a.getCidade().getEstado()%></td>
+			<td><a href="sistema?logica=ExcluirAluno&id=<%= a.getId() %>">X</a></td>
 		</tr>
 		<%
 			}

@@ -51,4 +51,38 @@ public class AlunoDao {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public Aluno pesquisaId(int id) {
+		String sql = "SELECT * FROM aluno WHERE id = ?";
+		try {
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			Aluno aluno = null; // uma forma de iniciar com null, para verificar posteriormente
+			if (rs.next()) {
+				Cidade cidade = new CidadeDao().pequisaId(rs.getInt("idCidade"));
+				aluno = new Aluno(rs.getInt("id"), rs.getString("nome"), rs.getInt("idade"), cidade);
+			}
+			return aluno;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void excluirId(int id) {
+		String sql = "DELETE FROM aluno WHERE id = ?";
+		try {
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+
+	public void excluirAluno(Aluno aluno) {
+		this.excluirId(aluno.getId());
+	}
 }
