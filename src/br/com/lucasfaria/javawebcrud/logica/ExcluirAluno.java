@@ -19,7 +19,7 @@ public class ExcluirAluno implements Logica {
 //		new AlunoDao().excluirAluno(aluno);
 		
 //		Modelo2
-		new AlunoDao().excluirId(idAluno);
+		new AlunoDao().excluirAluno(idAluno);
 		
 		return "sistema?logica=ListarAluno";
 	}

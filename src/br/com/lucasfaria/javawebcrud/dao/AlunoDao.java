@@ -41,7 +41,7 @@ public class AlunoDao {
 			ResultSet rs = stmt.executeQuery();
 			List<Aluno> lista = new ArrayList<Aluno>();
 			while (rs.next()) {
-				Cidade cidade = new CidadeDao().pequisaId(rs.getInt("idCidade"));
+				Cidade cidade = new CidadeDao().pesquisaId(rs.getInt("idCidade"));
 				Aluno aluno = new Aluno(rs.getInt("id"), rs.getString("nome"), rs.getInt("idade"), cidade);
 				lista.add(aluno);
 			}
@@ -60,7 +60,7 @@ public class AlunoDao {
 			ResultSet rs = stmt.executeQuery();
 			Aluno aluno = null; // uma forma de iniciar com null, para verificar posteriormente
 			if (rs.next()) {
-				Cidade cidade = new CidadeDao().pequisaId(rs.getInt("idCidade"));
+				Cidade cidade = new CidadeDao().pesquisaId(rs.getInt("idCidade"));
 				aluno = new Aluno(rs.getInt("id"), rs.getString("nome"), rs.getInt("idade"), cidade);
 			}
 			return aluno;
@@ -69,7 +69,7 @@ public class AlunoDao {
 		}
 	}
 
-	public void excluirId(int id) {
+	public void excluirAluno(int id) {
 		String sql = "DELETE FROM aluno WHERE id = ?";
 		try {
 			stmt = conexao.prepareStatement(sql);
@@ -79,10 +79,28 @@ public class AlunoDao {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	public void excluirAluno(Aluno aluno) {
-		this.excluirId(aluno.getId());
+		this.excluirAluno(aluno.getId());
+	}
+
+	public List<Aluno> pesquisaPorCidade(Cidade cidade) {
+		String sql = "SELECT * FROM aluno WHERE idCidade = ?";
+		try {
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, cidade.getId());
+			ResultSet rs = stmt.executeQuery();
+			List<Aluno> lista = new ArrayList<Aluno>();
+			while (rs.next()) {
+				Aluno aluno = new Aluno(rs.getInt("id"), rs.getString("nome"), rs.getInt("idade"), cidade);
+				lista.add(aluno);
+			}
+			stmt.close();
+			return lista;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

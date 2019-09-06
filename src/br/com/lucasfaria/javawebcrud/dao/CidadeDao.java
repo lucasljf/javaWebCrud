@@ -47,7 +47,7 @@ public class CidadeDao {
 		}
 	}
 
-	public Cidade pequisaId(int id) {
+	public Cidade pesquisaId(int id) {
 		String sql = "SELECT * FROM cidade WHERE id = ?";
 		try {
 			stmt = conexao.prepareStatement(sql);
@@ -60,6 +60,23 @@ public class CidadeDao {
 			return cidade;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	public void excluirCidade(Cidade cidade) {
+		this.excluirCidade(cidade.getId());
+
+	}
+
+	private void excluirCidade(int id) {
+		String sql = "DELETE FROM cidade WHERE id = ?";
+		try {
+			stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException();
 		}
 	}
 }

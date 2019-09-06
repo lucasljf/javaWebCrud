@@ -28,11 +28,13 @@
 			<td><%=a.getNome()%></td>
 			<td><%=a.getIdade()%></td>
 			<td><%=a.getCidade().getNome() + " - " + a.getCidade().getEstado()%></td>
-			<td><a href="sistema?logica=ExcluirAluno&id=<%= a.getId() %>">X</a></td>
+			<td><a href="sistema?logica=ExcluirAluno&id=<%=a.getId()%>">X</a></td>
 		</tr>
 		<%
 			}
 		%>
 	</table>
+	<br><br>
+	<a href="inicio.jsp">Voltar</a>
 </body>
 </html>
